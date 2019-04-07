@@ -1,0 +1,12 @@
+Kursy Walut na przyk³adzie danych z 2016 roku
+Jagosz Jakub, Ko³odziejczyk Rados³aw, Makuch Renata
+
+
+Projekt napisany w Python 3.
+
+Aby uruchomiæ projekt, nale¿y otoworzyæ plik "Zadanie"
+Po uruchomieniu w konsoli nale¿y:
+1. podaæ datê w formacie: 2016-MM-DD
+2. podaæ walutê z której chcemy przeliczyæ kwotê (jedn¹ z : USD, EUR, GBP, CHF, PLN)
+3. podaæ walutê na któr¹ chcemy przeliczyæ kwotê (jedn¹ z : USD, EUR, GBP, CHF, PLN, z wy³¹czeniem wybranej)
+4. podaæ kwotê do przeliczenia

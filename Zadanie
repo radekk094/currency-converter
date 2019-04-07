@@ -1,0 +1,54 @@
+import csv
+import datetime
+
+dane = {}
+with open('dane.csv', 'r') as csvfile:
+    reader = csv.DictReader(csvfile, skipinitialspace=True, delimiter=',')
+    for row in reader:
+        data = row.pop('Data')
+        dane[data] = row
+
+csvfile.closed
+
+print("Kursy Walut na przykładzie danych z 2016 roku")
+print("Jagosz Jakub, Kołodziejczyk Radosław, Makuch Renata")
+print("****************************************************\n")
+inputData = input("Podaj datę [2016-MM-DD]: ")
+try:
+    print(dane[inputData])
+except KeyError:
+    print('Brak danych, bądź nieprawidłowy format dla podanej daty: %s' % inputData)
+    exit()
+
+inputPrzeliczZ = input("\nPrzelicz z: ")
+inputPrzeliczZ = str(inputPrzeliczZ).upper()
+
+while (inputPrzeliczZ != "USD" and inputPrzeliczZ != "PLN" and inputPrzeliczZ != "EUR" and inputPrzeliczZ != "GBP" and inputPrzeliczZ != "CHF"):
+    print("Podano niepoprawną walutę, wprowadź ponownie.\n")
+    inputPrzeliczZ = input("Przelicz z: ")
+    inputPrzeliczZ = str(inputPrzeliczZ).upper()
+
+inputPrzeliczNa = input("Przelicz na: ")
+inputPrzeliczNa = str(inputPrzeliczNa).upper()
+
+while (inputPrzeliczNa != "USD" and inputPrzeliczNa != "PLN" and inputPrzeliczNa != "EUR" and inputPrzeliczNa != "GBP" and inputPrzeliczNa != "CHF"):
+    print("Podano niepoprawną walutę, wprowadź ponownie.\n")
+    inputPrzeliczNa = input("Przelicz na: ")
+    inputPrzeliczNa = str(inputPrzeliczNa).upper()
+
+inputKwota = float(input("\nPodaj kwotę: "))
+
+if (inputPrzeliczZ != "PLN"):
+    przelicznikZ = float(dane[inputData][inputPrzeliczZ])
+if (inputPrzeliczNa != "PLN"):
+    przelicznikNa = float(dane[inputData][inputPrzeliczNa])
+
+if inputPrzeliczZ == inputPrzeliczNa:
+    print("\nPrzeliczona kwota: ", round((inputKwota),2), inputPrzeliczNa)
+elif inputPrzeliczZ == 'PLN':
+    print("\nPrzeliczona kwota: ", round((inputKwota / przelicznikNa),2), inputPrzeliczNa)
+elif inputPrzeliczNa == 'PLN':
+    print("\nPrzeliczona kwota: ", round((inputKwota * przelicznikZ),2), inputPrzeliczNa)
+else:
+    print("\nPrzeliczona kwota: ", round((inputKwota * (przelicznikZ / przelicznikNa)),2), inputPrzeliczNa)
+
